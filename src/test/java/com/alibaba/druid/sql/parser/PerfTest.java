@@ -32,13 +32,19 @@ import com.alibaba.druid.util.JdbcUtils;
 
 public class PerfTest extends TestCase {
 
-    public void test_perf() throws Exception {
+    /*public void test_perf() throws Exception {
         for (int i = 0; i < 10; ++i) {
-            // perf("SELECT * FROM my_table WHERE TRUNC(SYSDATE) = DATE '2002-10-03';");
+            perf("SELECT * FROM my_table WHERE TRUNC(SYSDATE) = DATE '2002-10-03';");
             perfOracle("SELECT a.ID, a.GMT_CREATE, a.GMT_MODIFIED, a.COMPANY_NAME, a.BIZ_TYPE , b.SERVICE_TYPE, b.SERVICE_LEVEL, b.BUSINESS_ROLE, a.STATUS, a.RECOMMENDED , a.COUNTRY, a.PROVINCE, a.CITY, a.ADDRESS, a.ZIP , a.LOGO_FILE, a.EMAIL, a.BRIEF_PROFILE, a.DOMAIN_ID, a.IS_PASS_AV , a.KEYWORDS, a.PROVIDE_PRODUCTS, a.PURCHASE_PRODUCTS, a.BRAND_NAME, a.PROMOTION_VALUE , a.OWNER_MEMBER_ID, a.OWNER_SEQ, a.EMPLOYEES_COUNT, a.ANNUAL_REVENUE, a.HOMEPAGE_URL , a.REG_ADDRESS, a.TRADE_REGION, a.TRADE_REGION_USER, a.REG_CAPITAL, a.OWNERSHIP_TYPE , a.ESTABLISHED_YEAR, a.PRINCIPAL, a.ANNUAL_PURCHASE, a.CERTIFICATION, a.CERTIFICATION_2 , a.CONTACT_MANUFACTURING, a.YEARS_OEM, b.STAGE, a.VIDEO_PATH, a.ABOUTUS_IMAGE_PATH , a.ABOUTUS_IMAGE_TITLE, a.CHINESE_NAME, a.IMAGE_VERSION FROM COMPANY a, VACCOUNT b WHERE a.ID = b.ID AND a.id IN (?)");
             perfMySql("SELECT a.ID, a.GMT_CREATE, a.GMT_MODIFIED, a.COMPANY_NAME, a.BIZ_TYPE , b.SERVICE_TYPE, b.SERVICE_LEVEL, b.BUSINESS_ROLE, a.STATUS, a.RECOMMENDED , a.COUNTRY, a.PROVINCE, a.CITY, a.ADDRESS, a.ZIP , a.LOGO_FILE, a.EMAIL, a.BRIEF_PROFILE, a.DOMAIN_ID, a.IS_PASS_AV , a.KEYWORDS, a.PROVIDE_PRODUCTS, a.PURCHASE_PRODUCTS, a.BRAND_NAME, a.PROMOTION_VALUE , a.OWNER_MEMBER_ID, a.OWNER_SEQ, a.EMPLOYEES_COUNT, a.ANNUAL_REVENUE, a.HOMEPAGE_URL , a.REG_ADDRESS, a.TRADE_REGION, a.TRADE_REGION_USER, a.REG_CAPITAL, a.OWNERSHIP_TYPE , a.ESTABLISHED_YEAR, a.PRINCIPAL, a.ANNUAL_PURCHASE, a.CERTIFICATION, a.CERTIFICATION_2 , a.CONTACT_MANUFACTURING, a.YEARS_OEM, b.STAGE, a.VIDEO_PATH, a.ABOUTUS_IMAGE_PATH , a.ABOUTUS_IMAGE_TITLE, a.CHINESE_NAME, a.IMAGE_VERSION FROM COMPANY a, VACCOUNT b WHERE a.ID = b.ID AND a.id IN (?)");
             // perf(loadSql("bvt/parser/oracle-23.txt"));
         }
+    }
+*/
+
+    public void test_perf() throws Exception {
+        perfOracle("SELECT a.ID, a.GMT_CREATE, a.GMT_MODIFIED, a.COMPANY_NAME, a.BIZ_TYPE , b.SERVICE_TYPE, b.SERVICE_LEVEL, b.BUSINESS_ROLE, a.STATUS, a.RECOMMENDED , a.COUNTRY, a.PROVINCE, a.CITY, a.ADDRESS, a.ZIP , a.LOGO_FILE, a.EMAIL, a.BRIEF_PROFILE, a.DOMAIN_ID, a.IS_PASS_AV , a.KEYWORDS, a.PROVIDE_PRODUCTS, a.PURCHASE_PRODUCTS, a.BRAND_NAME, a.PROMOTION_VALUE , a.OWNER_MEMBER_ID, a.OWNER_SEQ, a.EMPLOYEES_COUNT, a.ANNUAL_REVENUE, a.HOMEPAGE_URL , a.REG_ADDRESS, a.TRADE_REGION, a.TRADE_REGION_USER, a.REG_CAPITAL, a.OWNERSHIP_TYPE , a.ESTABLISHED_YEAR, a.PRINCIPAL, a.ANNUAL_PURCHASE, a.CERTIFICATION, a.CERTIFICATION_2 , a.CONTACT_MANUFACTURING, a.YEARS_OEM, b.STAGE, a.VIDEO_PATH, a.ABOUTUS_IMAGE_PATH , a.ABOUTUS_IMAGE_TITLE, a.CHINESE_NAME, a.IMAGE_VERSION FROM COMPANY a, VACCOUNT b WHERE a.ID = b.ID AND a.id IN (?)");
+
     }
 
     String loadSql(String resource) throws Exception {
@@ -55,7 +61,8 @@ public class PerfTest extends TestCase {
     void perfOracle(String sql) {
         long startMillis = System.currentTimeMillis();
         for (int i = 0; i < 1000 * 1000; ++i) {
-            execOracle(sql);
+            String  ss =  execOracle(sql);
+            System.out.println("Oracle\t" + ss);
         }
         long millis = System.currentTimeMillis() - startMillis;
         System.out.println("Oracle\t" + millis);
@@ -64,7 +71,8 @@ public class PerfTest extends TestCase {
     void perfMySql(String sql) {
         long startMillis = System.currentTimeMillis();
         for (int i = 0; i < 1000 * 1000; ++i) {
-            execMySql(sql);
+            String ss = execMySql(sql);
+            System.out.println("Oracle\t" + ss);
         }
         long millis = System.currentTimeMillis() - startMillis;
         System.out.println("MySql\t" + millis);
